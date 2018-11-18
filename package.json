@@ -1,0 +1,17 @@
+{
+  "name": "liyad-webapp-example",
+  "private": true,
+  "version": "0.0.1",
+  "description": "",
+  "main": "app.lisp",
+  "scripts": {
+    "test": "echo \"Error: no test specified\""
+  },
+  "author": "shellyln",
+  "license": "ISC",
+  "dependencies": {
+    "liyad-lisp-pkg-example": "0.0.5",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
+  }
+}
