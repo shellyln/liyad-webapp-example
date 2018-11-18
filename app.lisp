@@ -1,19 +1,19 @@
 
-($console-error ($concat "file: " $__filename))
-($console-error ($concat "dir: " $__dirname))
+($console-log ($concat "filename: " $__filename))
+($console-log ($concat "dirname: "  $__dirname))
 
-($let ex ($require "liyad-lisp-pkg-example"))
+($let ex ($require "liyad-lisp-pkg-example" "lisp"))
 
 ;; Benchmarks
-($console-time) ($console-log (::ex:tarai 12 6 0)) ($console-time-end)
-($console-time) ($console-log (::ex:fib 10)) ($console-time-end)
-($console-time) ($console-log (::ex:fac 10)) ($console-time-end)
+($console-time) ($console-log "tarai(12, 6, 0): " (::ex:tarai 12 6 0)) ($console-time-end)
+($console-time) ($console-log "fib(10): " (::ex:fib 10)) ($console-time-end)
+($console-time) ($console-log "fac(10): " (::ex:fac 10)) ($console-time-end)
  
 
 ;; Run the web server on port 3000.
 ($let url ($node-require "url"))
-($let srv ($require "liyad-lisp-pkg-example"))
-; ($let db  ($node-require "./db.js"))
+($let srv ($require "liyad-lisp-pkg-example" "lisp"))
+($let db  ($node-require "./db.js"))
 
 
 ;; Register url handlers to web server.
@@ -36,24 +36,31 @@
     (html
         (head (title title-text))
         (body (div "this is the header")
-              content-node
+              ($=for ($range 1 3)
+                  content-node
+                  $data)
               (div "this is the footer") )))
 
 
 ;; It need LSX profile and bootstrap javascript file.
 (::srv:#get "/lsx" (-> (req res)
     ($let u (::url:parse ::req:url))
-    ; ($resolve-pipe (::db:query "") (-> (data) ($render ..)) )
-    ($render
-        ;; LSX notation
-        (page-header-footer "Welcome to LSX example"
-            (div (h1 (Hello (@ (name ::u:path))))
-                """p@{(style (color "red"))}
-                Good morning.
-                """ ))
-        ;; Process the rendering result.
-        (|-> (e html) use (req res)
-            (output-render-result e html req res) ))))
+    ($then ($resolve-pipe (::db:query "")
+        (|-> (data) use (req res u) ($render
+            ;; LSX notation
+            (page-header-footer "Welcome to LSX example"
+                (div (h1 (Hello (@ (name ::u:path))))
+                    (p ($datetime-to-iso-string ($now)))
+                    """p@{(style (color "red"))}
+                    Good morning.
+                    %%%(h4 data)
+                    """ ))
+            ;; Process the rendering result.
+            (|-> (e html) use (req res)
+                (output-render-result e html req res) ))))
+        (-> () nil)
+        (|-> (e) use (req res)
+            (output-render-result e null req res)) )))
 
 
 ;; Start server.
