@@ -1,6 +1,8 @@
 
+($console-error ($concat "file: " $__filename))
+($console-error ($concat "dir: " $__dirname))
+
 ($let ex ($require "liyad-lisp-pkg-example"))
- 
 
 ;; Benchmarks
 ($console-time) ($console-log (::ex:tarai 12 6 0)) ($console-time-end)
@@ -11,6 +13,7 @@
 ;; Run the web server on port 3000.
 ($let url ($node-require "url"))
 ($let srv ($require "liyad-lisp-pkg-example"))
+; ($let db  ($node-require "./db.js"))
 
 
 ;; Register url handlers to web server.
@@ -40,6 +43,7 @@
 ;; It need LSX profile and bootstrap javascript file.
 (::srv:#get "/lsx" (-> (req res)
     ($let u (::url:parse ::req:url))
+    ; ($resolve-pipe (::db:query "") (-> (data) ($render ..)) )
     ($render
         ;; LSX notation
         (page-header-footer "Welcome to LSX example"

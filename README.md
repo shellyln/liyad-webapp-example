@@ -16,5 +16,5 @@ $ npm ci
 ## Run
 
 ```bash
-$ liyad -p LSX --lsx-boot lsxboot.js app.lisp
+$ liyad -p LSX_async --lsx-boot lsxboot.js app.lisp
 ```
