@@ -1,0 +1,18 @@
+image: node:11
+
+before_script:
+  - npm install -g liyad-cli
+
+#cache:
+#  paths:
+#    - node_modules/
+
+test:node:11:
+  script:
+    - liyad index.lisp
+
+# LTS
+test:node:10:
+  image: node:10
+  script:
+    - liyad index.lisp
