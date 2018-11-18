@@ -2,13 +2,18 @@
   "name": "liyad-webapp-example",
   "private": true,
   "version": "0.0.1",
-  "description": "",
+  "description": "Web app example for Liyad Lisp interpreter; using LSX and React.",
+  "keywords": ["Lisp", "Liyad", "LSX", "JSX", "React", "SSL", "example"],
   "main": "app.lisp",
   "scripts": {
-    "test": "echo \"Error: no test specified\""
+    "test": "echo \"no test specified\""
   },
   "author": "shellyln",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shellyln/liyad-webapp-example.git"
+  },
   "dependencies": {
     "liyad-lisp-pkg-example": "0.0.5",
     "react": "^16.6.3",

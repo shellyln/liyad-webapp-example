@@ -8,7 +8,7 @@ LSX is alternative notation of JSX using Lisp.
 
 ```bash
 $ npm install -g liyad-cli
-$ git clone https://
+$ git clone https://github.com/shellyln/liyad-webapp-example.git
 $ cd liyad-webapp-example
 $ npm ci
 ```
