@@ -23,7 +23,7 @@
     (::res@end ($concat "hit / ," ::req:method "," ::u:path)) ))
 
 
-($defun output-render-result (e html req res) ($if html
+($defun output-render-result (e html req res) ($if ($not e)
     ($last
         (::res@writeHead 200 (# (Content-Type "text/html")))
         (::res@end ($concat "<!DOCTYPE html>" html)) )
@@ -50,11 +50,13 @@
             (|-> (data) use (q-res name)
                 ($set (q-res ($eval name)) data) ($last data) )))
     ($then ($resolve-pipe
-        ;; Fetch data
+        ;; Fetch data (from Model layer)
         (::db:begin)
         (::db:query "select * from x") (q-res-push "r1")
         (::db:query "select * from y") (q-res-push "r2")
         (::db:query "select * from z") (q-res-push "r3")
+        ;; TODO: transaction should or should not complete before rendering???
+        ;; Render (View layer)
         (|-> (data) use (req res u q-res) ($render
             ;; LSX notation
             (page-header-footer "Welcome to LSX example"
@@ -72,8 +74,8 @@
                     ;; Process the rendering result.
                     (|-> ()    use (e html req res) (output-render-result e           html req res))
                     (|-> (err) use (e html req res) (output-render-result ($or e err) html req res)) ) ))))
-        (-> () nil)
-        (|-> (e) use (req res)
+        ;; Errors on fetching data or rendering
+        (-> () nil) (|-> (e) use (req res)
             ($then (::db:rollback)
                 ;; Render the error.
                 (|-> ()    use (e req res) (output-render-result e null req res))
