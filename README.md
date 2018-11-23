@@ -19,3 +19,15 @@ $ npm ci
 $ liyad -p LSX_async --lsx-boot lsxboot.js app.lisp
 ```
 Server will serve on port 3000.
+
+
+## Run with PM2
+
+```bash
+$ npm install -g pm2@latest
+$ npm install liyad-cli
+$ pm2 start cluster.js -i max
+
+$ pm2 stop cluster
+$ pm2 delete cluster
+```

@@ -1,7 +1,7 @@
 {
   "name": "liyad-webapp-example",
   "private": false,
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Web app example for Liyad Lisp interpreter; using LSX and React.",
   "keywords": [
     "Lisp",
