@@ -1,7 +1,7 @@
 {
   "name": "liyad-webapp-example",
   "private": false,
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Web app example for Liyad Lisp interpreter; using LSX and React.",
   "keywords": [
     "Lisp",
@@ -23,7 +23,7 @@
     "url": "https://github.com/shellyln/liyad-webapp-example.git"
   },
   "dependencies": {
-    "liyad-lisp-pkg-example": "0.0.6",
+    "liyad-lisp-pkg-example": "^0.0.6",
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
   }
