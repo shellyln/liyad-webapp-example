@@ -16,7 +16,7 @@ $ npm ci
 ## Run
 
 ```bash
-$ liyad -p LSX_async --lsx-boot lsxboot.js app.lisp
+$ liyad -p LSX_async --lsx-boot ./lsxboot.js app.lisp
 ```
 Server will serve on port 3000.
 
